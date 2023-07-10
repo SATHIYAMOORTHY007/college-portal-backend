@@ -5,9 +5,10 @@ const studentSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  username: {
+  email: {
     type: String,
     require: true,
+    unique: true,
   },
   password: {
     type: String,

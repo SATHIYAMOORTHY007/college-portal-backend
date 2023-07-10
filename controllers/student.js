@@ -7,6 +7,7 @@ const createStudent = async (req, res) => {
   try {
     const {
       username,
+      useremail,
       pwd,
       roll_no,
       department,
@@ -16,7 +17,7 @@ const createStudent = async (req, res) => {
       Role,
     } = req.body
 
-    if (!roll_no || !pwd)
+    if (!roll_no || !pwd || !useremail)
       return res.status(400).send({ message: 'Rollno or password required' })
     //duplicated rollno
     const duplicate = await Student.findOne({ rollno: roll_no }).exec()
@@ -25,6 +26,7 @@ const createStudent = async (req, res) => {
     const hashpwd = await bcrypt.hash(pwd, 10)
     const student = await Student.create({
       name: username,
+      email: useremail,
       password: hashpwd,
       rollno: roll_no,
       dept: department,
@@ -62,9 +64,22 @@ const getParticularStudent = async (req, res) => {
   return res.status(200).json({ message: student })
 }
 
+//principal delete particular student
+const deleteStudent = async (req, res) => {
+  const id = req.params.id
+
+  try {
+    const student = await Student.findByIdAndDelete({ _id: id })
+    if (!student) return res.sendStatus(404)
+    return res.send('deleted successfully')
+  } catch (e) {
+    return res.sendStatus(400)
+  }
+}
+
 module.exports = {
   createStudent,
   getAllStudent,
-
+  deleteStudent,
   getParticularStudent,
 }

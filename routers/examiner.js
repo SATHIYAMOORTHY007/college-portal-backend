@@ -7,10 +7,18 @@ const {
   createLeave,
   getParticularStudentLeave,
 } = require('../controllers/examiner')
-
-router.post('/createExam', createExam)
-router.get('/getAllExam', getAllExam)
-router.get('/StudentExam/:student_id/:sem', getParticularStudentExam)
-router.post('/createLeave', createLeave)
-router.get('/StudentLeave/:student_id/:sem', getParticularStudentLeave)
+const { verifyPrivate, verifyToken } = require('../utils/verifyToken')
+router.post('/createExam', verifyPrivate, createExam)
+router.get('/getAllExam', verifyPrivate, getAllExam)
+router.get(
+  '/StudentExam/:student_id/:sem',
+  verifyToken,
+  getParticularStudentExam,
+)
+router.post('/createLeave', verifyPrivate, createLeave)
+router.get(
+  '/StudentLeave/:student_id/:sem',
+  verifyToken,
+  getParticularStudentLeave,
+)
 module.exports = router

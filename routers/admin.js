@@ -1,7 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const { createExaminer, getAllExaminer } = require('../controllers/admin')
+const {
+  createExaminer,
+  getAllExaminer,
+  createPrincipal,
+} = require('../controllers/admin')
+const { verifyAdmin, verifyPrivate } = require('../utils/verifyToken')
+router.post('/createExaminer', verifyAdmin, createExaminer)
+router.get('/getAllExaminer', verifyPrivate, getAllExaminer)
+router.post('/createPrincipal', verifyAdmin, createPrincipal)
 
-router.post('/createExaminer', createExaminer)
-router.get('/getAllExaminer', getAllExaminer)
 module.exports = router

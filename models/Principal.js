@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const examinerSchema = new mongoose.Schema({
+const principalSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
@@ -20,4 +20,4 @@ const examinerSchema = new mongoose.Schema({
   },
 })
 
-module.exports = mongoose.model('examiner', examinerSchema)
+module.exports = mongoose.model('Principal', principalSchema)

@@ -4,10 +4,15 @@ const {
   createStudent,
   getAllStudent,
   getParticularStudent,
+  deleteStudent,
 } = require('../controllers/student')
-
-router.post('/create', createStudent)
-router.get('/getAllStudent', getAllStudent)
-
-router.get('/getParticularStudent/:student_id', getParticularStudent)
+const { verifyToken, verifyPrivate } = require('../utils/verifyToken')
+router.post('/create', verifyPrivate, createStudent)
+router.get('/getAllStudent', verifyPrivate, getAllStudent)
+router.delete('/deleteStudent/:id', verifyPrivate, deleteStudent)
+router.get(
+  '/getParticularStudent/:student_id',
+  verifyToken,
+  getParticularStudent,
+)
 module.exports = router
