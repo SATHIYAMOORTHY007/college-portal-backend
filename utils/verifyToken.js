@@ -7,9 +7,6 @@ const verifyToken = (req, res, next) => {
     return res.sendStatus(404)
   }
   jwt.verify(token, process.env.JWT, (err, user) => {
-    if (err) {
-      res.sendStatus(404)
-    }
     next()
   })
 }
