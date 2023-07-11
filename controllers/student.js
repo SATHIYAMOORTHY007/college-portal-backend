@@ -77,9 +77,31 @@ const deleteStudent = async (req, res) => {
   }
 }
 
+const updateStudent = async (req, res) => {
+  const id = req.params.id
+  const { name, email, rollno, dept, course, section, gender } = req.body
+  try {
+    const student = await Student.findByIdAndUpdate(id, {
+      name,
+      email,
+      rollno,
+      dept,
+      course,
+      section,
+      gender,
+    })
+
+    await student.save()
+    if (!student) return res.sendStatus(404)
+    return res.send(student)
+  } catch (e) {
+    return res.status(400).send(e)
+  }
+}
 module.exports = {
   createStudent,
   getAllStudent,
   deleteStudent,
   getParticularStudent,
+  updateStudent,
 }
