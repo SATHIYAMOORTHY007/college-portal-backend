@@ -60,6 +60,7 @@ const getParticularStudent = async (req, res) => {
     { _id: id },
     { attendance: 0, exam: 0, password: 0 },
   )
+  console.log(student)
   if (!student) return res.status(404).json({ message: 'no data' })
   return res.status(200).json({ message: student })
 }
