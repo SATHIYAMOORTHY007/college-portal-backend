@@ -16,9 +16,5 @@ router.get(
   getParticularStudentExam,
 )
 router.post('/createLeave', verifyPrivate, createLeave)
-router.get(
-  '/StudentLeave/:student_id/:sem',
-  verifyToken,
-  getParticularStudentLeave,
-)
+router.get('/StudentLeave/:student_id/:sem', getParticularStudentLeave)
 module.exports = router
