@@ -79,7 +79,8 @@ const deleteStudent = async (req, res) => {
 }
 
 const updateStudent = async (req, res) => {
-  const id = req.params.id
+  const id = req.params.student_id
+  console.log(req.body)
   const { name, email, rollno, dept, course, section, gender } = req.body
   try {
     const student = await Student.findByIdAndUpdate(id, {
