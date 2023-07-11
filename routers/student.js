@@ -14,7 +14,7 @@ router.delete('/deleteStudent/:id', verifyPrivate, deleteStudent)
 router.put('/updateStudent/:student_id', verifyPrivate, updateStudent)
 router.get(
   '/getParticularStudent/:student_id',
-
+  verifyToken,
   getParticularStudent,
 )
 module.exports = router
